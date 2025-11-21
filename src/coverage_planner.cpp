@@ -319,6 +319,14 @@ slic3r_coverage_planner::Path determinePathForOutline(std_msgs::Header &header, 
 }
 
 bool planPath(slic3r_coverage_planner::PlanPathRequest &req, slic3r_coverage_planner::PlanPathResponse &res) {
+    ROS_INFO_STREAM("YL:Started planPath " << req.outline.points.size() << " outline points, "
+                    << req.holes.size() << " holes, "
+                    << req.outline_count << " outlines, "
+                    << req.outline_overlap_count << " overlap_count, "
+                    << req.distance << " distance, "
+                    << req.outer_offset << " outer_offset, "
+                    << req.fill_type << " fill_type, "
+                    << req.angle << " angle");
     Slic3r::Polygon outline_poly;
     for (auto &pt: req.outline.points) {
         outline_poly.points.push_back(Point(scale_(pt.x), scale_(pt.y)));
